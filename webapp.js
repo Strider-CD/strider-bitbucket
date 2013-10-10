@@ -146,38 +146,42 @@ module.exports = {
       consumerSecret: this.appConfig.appSecret,
       callbackURL: this.appConfig.myHostname + '/ext/bitbucket/oauth/callback',
       passReqToCallback: true
-    }, function(req, token, tokenSecret, profile, done) {
-      if (!req.user){
-        return done(new Error("Cannot sign up with bitbucket - you must link it to account"));
-      } 
-      for (var i=0; i<req.user.accounts.length; i++) {
-        if (req.user.accounts[i].provider === 'bitbucket' &&
-            req.user.accounts[i].id === profile.username) {
-          console.warn("Trying to attach a github account that's already attached...")
-          return done(new Error('Account already linked to this user'))
-        }
-      }
-      var username = profile.username
-        , cache = profile._json.repositories.map(api.parseRepo).filter(function (repo) {
-            return repo.config.scm === 'git';
-          })
-      req.user.accounts.push({
-        provider: 'bitbucket',
-        id: profile.username,
-        display_url: 'https://bitbucket.com/' + profile.username,
-        title: profile.username,
-        config: {
-          accessToken: token,
-          tokenSecret: tokenSecret,
-          login: profile.username,
-          avatar: profile._json.user.avatar,
-          name: profile.displayName
-        },
-        cache: cache
-      })
-      req.user.save(function (err) {
-        done(err, req.user);
-      })
-    }));
+    }, validateAuth));
   },
+}
+
+function validateAuth(req, token, tokenSecret, profile, done) {
+  if (!req.user){
+    return done(new Error("Cannot sign up with bitbucket - you must link it to account"));
+  } 
+  var account = req.user.account('bitbucket', profile.username)
+  if (account) {
+    console.warn("Trying to attach a github account that's already attached...")
+    return done(new Error('Account already linked to this user'))
+  }
+  req.user.accounts.push(makeAccount(token, tokenSecret, profile))
+  req.user.save(function (err) {
+    done(err, req.user);
+  })
+}
+
+function makeAccount(token, tokenSecret, profile) {
+  var username = profile.username
+    , cache = profile._json.repositories.map(api.parseRepo).filter(function (repo) {
+        return repo.config.scm === 'git';
+      })
+  return {
+    provider: 'bitbucket',
+    id: profile.username,
+    display_url: 'https://bitbucket.com/' + profile.username,
+    title: profile.username,
+    config: {
+      accessToken: token,
+      tokenSecret: tokenSecret,
+      login: profile.username,
+      avatar: profile._json.user.avatar,
+      name: profile.displayName
+    },
+    cache: cache
+  }
 }
