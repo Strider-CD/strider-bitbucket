@@ -1,0 +1,52 @@
+{
+  "name": "strider-bitbucket",
+  "version": "0.0.0",
+  "description": "A bitbucket provider for strider",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Strider-CD/strider-bitbucket-provider.git"
+  },
+  "keywords": [
+    "git",
+    "bitbucket",
+    "oauth",
+    "strider"
+  ],
+  "author": "Jared Forsyth <jared@jaredforsyth.com>",
+  "license": "MIT",
+  "readmeFilename": "Readme.md",
+  "strider": {
+    "id": "bitbucket",
+    "title": "Bitbucket",
+    "type": "provider",
+    "hosted": true,
+    "config": true,
+    "accountConfig": {
+      "setupLink": "/ext/bitbucket/oauth"
+    },
+    "webapp": "webapp.js",
+    "worker": "worker.js",
+    "inline_icon": "bitbucket"
+  },
+  "devDependencies": {
+    "jshint": "~2.1.11",
+    "expect.js": "~0.2.0",
+    "mocha": "~1.13.0"
+  },
+  "dependencies": {
+    "passport": "~0.1.17",
+    "passport-bitbucket": "~0.1.2",
+    "superagent": "~0.15.4",
+    "strider-git": "git+https://github.com/Strider-CD/strider-git.git",
+    "request": "~2.27.0",
+    "lodash": "~2.2.0",
+    "step": "0.0.5",
+    "async": "~0.2.9",
+    "crypto": "0.0.3",
+    "oauth": "~0.9.10"
+  }
+}
