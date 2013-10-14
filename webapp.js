@@ -25,6 +25,7 @@ module.exports = {
     owner: String,
     repo: String,
     scm: String,
+    cache: Boolean,
     pull_requests: {type: String, enum: ['all', 'none', 'whitelist']},
     whitelist: [{
       name: String,
@@ -35,6 +36,8 @@ module.exports = {
     auth: {}
   },
 
+  // get an oauth manager.
+  // -> {get: fn(), post: fn(), del: fn()}
   oauth: function (account) {
     var oauth = new OAuth(
       'https://bitbucket.org/api/1.0/oauth/request_token/',
@@ -139,6 +142,7 @@ module.exports = {
       });
   },
 
+  // register the passport auth strategy
   auth: function (passport, context) {
     var config = this.appConfig
     passport.use(new BitbucketStrategy({
@@ -151,7 +155,7 @@ module.exports = {
 }
 
 function validateAuth(req, token, tokenSecret, profile, done) {
-  if (!req.user){
+  if (!req.user) {
     return done(new Error("Cannot sign up with bitbucket - you must link it to account"));
   } 
   var account = req.user.account('bitbucket', profile.username)
