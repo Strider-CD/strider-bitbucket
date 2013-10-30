@@ -105,9 +105,14 @@ module.exports = {
       key: key
     }, function (err, data, res) {
       if (err) return done(err)
-      config.pk = data[0].pk
+      try {
+        data = JSON.parse(data)
+      } catch (e) {
+        return done(new Error('failed to register public key'))
+      }
+      config.pk = data.pk
       done(null, config)
-      /*
+      /* Here's where we register webhooks
       client.post(API + 'repositories/' + project.name + '/services/', {
         type: 'POST',
         */
