@@ -97,7 +97,7 @@ module.exports = {
     for (var i=0; i<project.branches.length; i++) {
       if (project.branches[i].name === 'master') {
         key = project.branches[i].pubkey.toString()
-        break
+        break;
       }
     }
     client.post(url, {
