@@ -161,12 +161,15 @@ module.exports = {
 
 function validateAuth(req, token, tokenSecret, profile, done) {
   if (!req.user) {
-    return done(new Error("Cannot sign up with bitbucket - you must link it to account"));
+    console.warn('Bitbucket OAuth but no logged-in user')
+    req.flash('account', "Cannot link a bitbucket account if you aren't logged in")
+    return done()
   } 
   var account = req.user.account('bitbucket', profile.username)
   if (account) {
-    console.warn("Trying to attach a github account that's already attached...")
-    return done(new Error('Account already linked to this user'))
+    console.warn("Trying to attach a bitbucket account that's already attached...")
+    req.flash('account', 'That bitbucket account is already linked. Sign out of bitbucket before you click "Add Account"')
+    return done(null, req.user)
   }
   req.user.accounts.push(makeAccount(token, tokenSecret, profile))
   req.user.save(function (err) {
