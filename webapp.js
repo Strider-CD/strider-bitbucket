@@ -7,7 +7,7 @@ var API = 'https://bitbucket.org/api/1.0/'
 
 module.exports = {
   appConfig: {
-    myHostname: 'http://localhost:3000',
+    hostname: 'http://localhost:3000',
     appKey: 'yxP57RbJNLsCjzvn3p',
     appSecret: 'n65ZnGRkE58AsVfPMKugaPSuWKGXMtTg'
   },
@@ -101,7 +101,7 @@ module.exports = {
       }
     }
     client.post(url, {
-      label: 'strider at ' + this.appConfig.myHostname,
+      label: 'strider at ' + this.appConfig.hostname,
       key: key
     }, function (err, data, res) {
       if (err) return done(err)
@@ -153,7 +153,7 @@ module.exports = {
     passport.use(new BitbucketStrategy({
       consumerKey: this.appConfig.appKey,
       consumerSecret: this.appConfig.appSecret,
-      callbackURL: this.appConfig.myHostname + '/ext/bitbucket/oauth/callback',
+      callbackURL: this.appConfig.hostname + '/ext/bitbucket/oauth/callback',
       passReqToCallback: true
     }, validateAuth));
   },
@@ -168,7 +168,7 @@ function validateAuth(req, token, tokenSecret, profile, done) {
   var account = req.user.account('bitbucket', profile.username)
   if (account) {
     console.warn("Trying to attach a bitbucket account that's already attached...")
-    req.flash('account', 'That bitbucket account is already linked. Sign out of bitbucket before you click "Add Account"')
+    req.flash('account', 'That bitbucket account is already linked. <a href="https://bitbucket.org/account/signout/" target="_blank">Sign out of bitbucket</a> before you click "Add Account".')
     return done(null, req.user)
   }
   req.user.accounts.push(makeAccount(token, tokenSecret, profile))
