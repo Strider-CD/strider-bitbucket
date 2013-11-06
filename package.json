@@ -35,7 +35,8 @@
   "devDependencies": {
     "jshint": "~2.1.11",
     "expect.js": "~0.2.0",
-    "mocha": "~1.13.0"
+    "mocha": "~1.13.0",
+    "chai": "~1.8.1"
   },
   "dependencies": {
     "passport": "~0.1.17",
@@ -47,6 +48,7 @@
     "step": "0.0.5",
     "async": "~0.2.9",
     "crypto": "0.0.3",
-    "oauth": "~0.9.10"
+    "oauth": "~0.9.10",
+    "gravatar": "~1.0.6"
   }
 }

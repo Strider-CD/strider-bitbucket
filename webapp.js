@@ -32,6 +32,7 @@ module.exports = {
       level: {type: String, enum: ['tester', 'admin']}
     }],
     pk: Number,
+    secret: String,
     // type: https || ssh
     auth: {}
   },
@@ -93,6 +94,7 @@ module.exports = {
   setupRepo: function (account, config, project, done) {
     var client = this.oauth(account)
       , url = API + 'repositories/' + project.name + '/deploy-keys'
+      , self = this
       , key
     for (var i=0; i<project.branches.length; i++) {
       if (project.branches[i].name === 'master') {
@@ -100,6 +102,7 @@ module.exports = {
         break;
       }
     }
+    // register keys
     client.post(url, {
       label: 'strider at ' + this.appConfig.hostname,
       key: key
@@ -111,18 +114,23 @@ module.exports = {
         return done(new Error('failed to register public key'))
       }
       config.pk = data.pk
-      done(null, config)
-      /* Here's where we register webhooks
-      client.post(API + 'repositories/' + project.name + '/services/', {
-        type: 'POST',
-        */
+      api.setWebhooks(client, self.appConfig.hostname, project.name, function (err, secret) {
+        config.secret = secret
+        done(null, config)
+      })
     })
   },
 
   teardownRepo: function (account, config, project, done) {
     var client = this.oauth(account)
       , url = API + 'repositories/' + project.name + '/deploy-keys/' + config.pk
-    client.del(url, done)
+      , self = this
+    client.del(url, function (err) {
+      api.removeWebhooks(client, self.appConfig.hostname, project.name, function (err, found) {
+        // do we give some indication of whether or not there was a webhook to remove?
+        done(err)
+      })
+    })
   },
 
   listRepos: function (account, next) {
@@ -133,6 +141,41 @@ module.exports = {
       next(null, data.map(api.parseRepo).filter(function (repo) {
         return repo.config.scm === 'git';
       }))
+    })
+  },
+
+  // namespaced to /org/repo/api/bitbucket/
+  routes: function (app, context) {
+    var self = this
+    app.post('hook', function (req, res) {
+      var client = this.oauth(req.accountConfig())
+      api.setWebhooks(client, self.appConfig.hostname, req.project.name, function (err, secret, already) {
+        if (err) return res.send(500, 'Failed to set webhooks')
+        var config = req.providerConfig()
+        config.secret = secret
+        req.providerConfig(config, function (err) {
+          if (err) return res.send(500, 'Error saving config')
+          res.send(200, already ? 'Webhooks already existed' : 'Webhooks created')
+        })
+      })
+    })
+    app.del('hook', function (req, res) {
+      var client = this.oauth(req.accountConfig())
+      api.removeWebhooks(client, self.appConfig.hostname, req.project.name, function (err, found) {
+        if (err) return res.send(500, 'Failed to remove webhooks')
+        res.send(200, found ? 'Webhooks removed' : 'No webhooks found to remove')
+      })
+    })
+    app.anon.post('commit/:secret', function (req, res) {
+      var config = req.providerConfig()
+      if (config.secret !== req.params.secret) return res.send(400, 'Invalid secret')
+      api.startCommitJob(req.body.payload, req.project, context.emitter, function (err) {
+        if (err) return res.send(500, 'Failed to start job')
+        res.send(204)
+      })
+    })
+    app.anon.post('pull-request/:secret', function (req, res) {
+      console.error('Got PR, but not enabled yet')
     })
   },
 
