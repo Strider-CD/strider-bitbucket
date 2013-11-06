@@ -68,7 +68,7 @@ module.exports = {
         return oauth.post(url, account.accessToken, account.tokenSecret, body, contentType, parse.bind(null, done))
       },
       del: function (url, done) {
-        return oauth.get(url, account.accessToken, account.tokenSecret, parse.bind(null, done))
+        return oauth.delete(url, account.accessToken, account.tokenSecret, parse.bind(null, done))
       },
       orig: oauth
     }
@@ -168,8 +168,14 @@ module.exports = {
     })
     app.anon.post('commit/:secret', function (req, res) {
       var config = req.providerConfig()
+        , data
       if (config.secret !== req.params.secret) return res.send(400, 'Invalid secret')
-      api.startCommitJob(req.body.payload, req.project, context.emitter, function (err) {
+      try {
+        data = JSON.parse(req.body.payload)
+      } catch (e) {
+        return res.send(400, 'Invalid json payload')
+      }
+      api.startCommitJob(data, req.project, context.emitter, function (err) {
         if (err) return res.send(500, 'Failed to start job')
         res.send(204)
       })
