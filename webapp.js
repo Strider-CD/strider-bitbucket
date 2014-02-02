@@ -135,13 +135,7 @@ module.exports = {
 
   listRepos: function (account, next) {
     var client = this.oauth(account)
-      , url = API + 'user/repositories/'
-    client.get(url, function (err, data, req) {
-      if (err) return next(err)
-      next(null, data.map(api.parseRepo).filter(function (repo) {
-        return repo.config.scm === 'git';
-      }))
-    })
+    listRepos(client, next)
   },
 
   // namespaced to /org/repo/api/bitbucket/
@@ -204,11 +198,21 @@ module.exports = {
       consumerSecret: this.appConfig.appSecret,
       callbackURL: this.appConfig.hostname + '/ext/bitbucket/oauth/callback',
       passReqToCallback: true
-    }, validateAuth));
+    }, validateAuth.bind(null, this.oauth.bind(this))));
   },
 }
 
-function validateAuth(req, token, tokenSecret, profile, done) {
+function listRepos(client, next) {
+  var url = API + 'user/repositories/'
+  client.get(url, function (err, data, req) {
+    if (err) return next(err)
+      next(null, data.map(api.parseRepo).filter(function (repo) {
+        return repo.config.scm === 'git';
+      }))
+  })
+}
+
+function validateAuth(oauth, req, token, tokenSecret, profile, done) {
   if (!req.user) {
     console.warn('Bitbucket OAuth but no logged-in user')
     req.flash('account', "Cannot link a bitbucket account if you aren't logged in")
@@ -220,17 +224,21 @@ function validateAuth(req, token, tokenSecret, profile, done) {
     req.flash('account', 'That bitbucket account is already linked. <a href="https://bitbucket.org/account/signout/" target="_blank">Sign out of bitbucket</a> before you click "Add Account".')
     return done(null, req.user)
   }
-  req.user.accounts.push(makeAccount(token, tokenSecret, profile))
-  req.user.save(function (err) {
-    done(err, req.user);
+  var client = oauth({
+    accessToken: token,
+    tokenSecret: tokenSecret
+  })
+  listRepos(client, function (err, repos) {
+    if (err) return done(new Error('Failed to get repositories for user'))
+    req.user.accounts.push(makeAccount(token, tokenSecret, profile, repos))
+    req.user.save(function (err) {
+      done(err, req.user);
+    })
   })
 }
 
-function makeAccount(token, tokenSecret, profile) {
+function makeAccount(token, tokenSecret, profile, repos) {
   var username = profile.username
-    , cache = profile._json.repositories.map(api.parseRepo).filter(function (repo) {
-        return repo.config.scm === 'git';
-      })
   return {
     provider: 'bitbucket',
     id: profile.username,
@@ -243,6 +251,6 @@ function makeAccount(token, tokenSecret, profile) {
       avatar: profile._json.user.avatar,
       name: profile.displayName
     },
-    cache: cache
+    cache: repos
   }
 }
