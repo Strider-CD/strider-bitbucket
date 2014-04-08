@@ -7,7 +7,6 @@ var API = 'https://bitbucket.org/api/1.0/'
 
 module.exports = {
   appConfig: {
-    hostname: 'http://localhost:3000',
     appKey: 'yxP57RbJNLsCjzvn3p',
     appSecret: 'n65ZnGRkE58AsVfPMKugaPSuWKGXMtTg'
   },
@@ -140,6 +139,10 @@ module.exports = {
 
   // namespaced to /org/repo/api/bitbucket/
   routes: function (app, context) {
+    // set config based on server_name
+    if (!this.appConfig.hostname) {
+      this.appConfig.hostname = context.config.server_name
+    }
     var self = this
     app.post('hook', function (req, res) {
       var client = this.oauth(req.accountConfig())
