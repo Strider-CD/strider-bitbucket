@@ -195,7 +195,6 @@ module.exports = {
 
   // register the passport auth strategy
   auth: function (passport, context) {
-    var config = this.appConfig
     passport.use(new BitbucketStrategy({
       consumerKey: this.appConfig.appKey,
       consumerSecret: this.appConfig.appSecret,
