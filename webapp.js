@@ -106,7 +106,14 @@ module.exports = {
       label: 'strider at ' + this.appConfig.hostname,
       key: key
     }, function (err, data, res) {
-      if (err) return done(err)
+      if (err) {
+        if (err.statusCode === 403) {
+          return done(new Error('failed to register public key - user must have admin privileges for this repository'));
+        }
+
+        return done(err);
+      }
+
       try {
         data = JSON.parse(data)
       } catch (e) {
