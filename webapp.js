@@ -76,7 +76,12 @@ module.exports = {
   getBranches: function (account, config, project, done) {
     var client = this.oauth(account)
     client.get(API + 'repositories/' + project.name + '/branches', function (err, data, res) {
-      done(null, Object.keys(data))
+      if (typeof data === "object") {
+        done(null, Object.keys(data))
+      } else {
+        console.error("bitbucket is down but is sending a 200 anyway");
+        done(null, [])
+      }
     })
   },
 

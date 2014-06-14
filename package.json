@@ -1,6 +1,6 @@
 {
   "name": "strider-bitbucket",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A bitbucket provider for strider",
   "main": "index.js",
   "scripts": {
@@ -33,10 +33,11 @@
     "inline_icon": "bitbucket"
   },
   "devDependencies": {
-    "jshint": "~2.1.11",
+    "chai": "~1.8.1",
     "expect.js": "~0.2.0",
+    "jshint": "~2.1.11",
     "mocha": "~1.13.0",
-    "chai": "~1.8.1"
+    "sinon": "^1.10.2"
   },
   "dependencies": {
     "passport": "~0.1.17",
