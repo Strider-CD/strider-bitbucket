@@ -6,3 +6,6 @@ lint:
 
 test-only:
 	@./node_modules/.bin/mocha -R spec
+
+tdd:
+	@./node_modules/.bin/mocha -R spec -w
