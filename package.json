@@ -1,6 +1,6 @@
 {
   "name": "strider-bitbucket",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A bitbucket provider for strider",
   "main": "index.js",
   "scripts": {
@@ -43,7 +43,7 @@
     "passport": "~0.1.17",
     "passport-bitbucket": "~0.1.2",
     "superagent": "~0.15.4",
-    "strider-git": "~0.1.0",
+    "strider-git": "~0.2.0",
     "request": "~2.27.0",
     "lodash": "~2.2.0",
     "step": "0.0.5",
