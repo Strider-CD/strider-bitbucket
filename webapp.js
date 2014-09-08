@@ -46,12 +46,19 @@ module.exports = {
       this.appConfig.appSecret,
       '1.0', null, 'HMAC-SHA1', null, {})
     function parse(done, err, body, res) {
-      if (res.headers['content-type'].toLowerCase().indexOf('application/json') === -1) return done(err, body, res)
+      if (!res) {
+        return done(new Error('Invalid oauth response'));
+      }
+
+      if (res.headers['content-type'].toLowerCase().indexOf('application/json') === -1) {
+        return done(err, body, res)
+      }
+
       var data
       try {
         data = JSON.parse(body)
       } catch (e) {
-        return done(new Error('Failed to parse json body: ' + e.message + ';; ' + body))
+        return done(new Error('Failed to parse json body: ' + e.message + '; ' + body))
       }
       if ('object' !== typeof data) {
         return done(new Error('Unexpected body format, wanted an object: ' + body))
