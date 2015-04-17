@@ -94,7 +94,7 @@ module.exports = {
 
   getFile: function (filename, ref, account, config, project, done) {
     var client = this.oauth(account)
-      , url = API + 'repositories/' + project.name + '/raw/' + ref + '/' + filename
+      , url = API + 'repositories/' + project.name + '/raw/' + ref.branch + '/' + filename
     client.get(url, function (err, body, res) {
       done(err, body)
     })
