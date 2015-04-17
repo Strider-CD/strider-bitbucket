@@ -96,7 +96,12 @@ module.exports = {
     var client = this.oauth(account)
       , url = API + 'repositories/' + project.name + '/raw/' + ref.branch + '/' + filename
     client.get(url, function (err, body, res) {
-      done(err, body)
+      if (err && err.statusCode) {
+        err.status = err.statusCode;
+        delete err.statusCode;
+      }
+      
+      done(err, body);
     })
   },
 
