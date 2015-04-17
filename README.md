@@ -13,6 +13,7 @@ webhooks.
 - clone, update, code caching
 - commit webhooks management
 - ssh key management
+- skipping commits via `[skip ci]` in commit message
 
 ## What's not done
 
