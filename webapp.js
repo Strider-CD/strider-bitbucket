@@ -1,3 +1,4 @@
+'use strict';
 
 var api = require('./lib/api');
 var BitbucketStrategy = require('passport-bitbucket').Strategy;
