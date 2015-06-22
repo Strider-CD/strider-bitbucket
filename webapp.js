@@ -1,9 +1,8 @@
 
-var api = require('./lib/api')
-  , BitbucketStrategy = require('passport-bitbucket').Strategy
-  , OAuth = require('oauth').OAuth
-
-var API = 'https://bitbucket.org/api/1.0/'
+var api = require('./lib/api');
+var BitbucketStrategy = require('passport-bitbucket').Strategy;
+var OAuth = require('oauth').OAuth;
+var API = 'https://bitbucket.org/api/1.0/';
 
 module.exports = {
   appConfig: {
@@ -171,34 +170,34 @@ module.exports = {
     app.post('hook', function (req, res) {
       var client = this.oauth(req.accountConfig())
       api.setWebhooks(client, self.appConfig.hostname, req.project.name, function (err, secret, already) {
-        if (err) return res.send(500, 'Failed to set webhooks')
+        if (err) return res.status(500).send('Failed to set webhooks')
         var config = req.providerConfig()
         config.secret = secret
         req.providerConfig(config, function (err) {
-          if (err) return res.send(500, 'Error saving config')
-          res.send(200, already ? 'Webhooks already existed' : 'Webhooks created')
+          if (err) return res.status(500).send('Error saving config')
+          res.send(already ? 'Webhooks already existed' : 'Webhooks created')
         })
       })
     })
     app.del('hook', function (req, res) {
       var client = this.oauth(req.accountConfig())
       api.removeWebhooks(client, self.appConfig.hostname, req.project.name, function (err, found) {
-        if (err) return res.send(500, 'Failed to remove webhooks')
-        res.send(200, found ? 'Webhooks removed' : 'No webhooks found to remove')
+        if (err) return res.status(500).send('Failed to remove webhooks')
+        res.send(found ? 'Webhooks removed' : 'No webhooks found to remove')
       })
     })
     app.anon.post('commit/:secret', function (req, res) {
       var config = req.providerConfig()
         , data
-      if (config.secret !== req.params.secret) return res.send(400, 'Invalid secret')
+      if (config.secret !== req.params.secret) return res.status(400).send('Invalid secret')
       try {
         data = JSON.parse(req.body.payload)
       } catch (e) {
-        return res.send(400, 'Invalid json payload')
+        return res.status(400).send('Invalid json payload')
       }
       api.startCommitJob(data, req.project, context.emitter, function (err) {
-        if (err) return res.send(500, 'Failed to start job')
-        res.send(204)
+        if (err) return res.status(500).send('Failed to start job')
+        res.sendStatus(204)
       })
     })
     app.anon.post('pull-request/:secret', function (req, res) {
