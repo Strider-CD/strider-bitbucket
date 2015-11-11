@@ -12,6 +12,7 @@
   },
   "keywords": [
     "git",
+    "hg",
     "bitbucket",
     "oauth",
     "strider"
@@ -46,6 +47,7 @@
     "passport-bitbucket": "~0.1.2",
     "superagent": "~0.15.4",
     "strider-git": "~0.2.4",
+    "strider-hg": "~0.2.3",
     "request": "~2.27.0",
     "lodash": "~2.2.0",
     "step": "0.0.5",
