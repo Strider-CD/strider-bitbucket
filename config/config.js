@@ -1,3 +1,4 @@
+/* globals app, $ */
 app.controller('BitbucketCtrl', ['$scope', function ($scope){
 
     $scope.config = $scope.providerConfig();

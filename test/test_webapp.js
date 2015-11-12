@@ -1,4 +1,4 @@
-var webapp = require('../webapp');
+var webapp = require('../lib/webapp');
 var expect = require('expect.js')
 var sinon = require('sinon');
 
