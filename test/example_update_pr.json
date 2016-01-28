@@ -69,42 +69,17 @@
         "date": "2013-11-06T06:00:16.196841+00:00"
     }
 }
-{ id: 56a9aa30a525f5663914bc12,
-phases:
-{ environment:
-{ finished: Thu Jan 28 2016 11:42:09 GMT+0600 (NOVT),
-exitCode: 0,
-commands: [],
-duration: 1 },
-prepare:
-{ finished: Thu Jan 28 2016 11:42:19 GMT+0600 (NOVT),
-exitCode: 0,
-commands: [Object],
-duration: 10295 },
-test:
-{ finished: Thu Jan 28 2016 11:42:19 GMT+0600 (NOVT),
-exitCode: 0,
-commands: [],
-duration: 0 },
-deploy:
-{ finished: Thu Jan 28 2016 11:42:20 GMT+0600 (NOVT),
-exitCode: undefined,
-commands: [Object],
-duration: 98 },
-cleanup:
-{ finished: Thu Jan 28 2016 11:42:20 GMT+0600 (NOVT),
-exitCode: 0,
-commands: [],
-duration: 0 } },
-phase: 'cleanup',
-queued: Thu Jan 28 2016 11:42:09 GMT+0600 (NOVT),
-started: Thu Jan 28 2016 11:42:09 GMT+0600 (NOVT),
-finished: Thu Jan 28 2016 11:42:20 GMT+0600 (NOVT),
-test_status: undefined,
-warnings: [],
-deploy_status: undefined,
-plugin_data: { custom: { deployCmd: 'failed' } },
-std:
-{ out: 'добавляем наборы изменений\nдобавляем манифесты\nдобавляем изменения в файлы\nдобавлено 501 наборов изменений с 690 изменениями в 156 файлах\nобновляемся на ветку feature/0000-test-for-strider\n103 файлов обновлено, 0 слито, 0 удалено, 0 c конфликтами\n0 файлов обновлено, 0 слито, 0 удалено, 0 c конфликтами\n',
-err: '+ \'[\' -z \'\' \']\'\n+ return\n+ case $- in\n+ return\n+ PROJECT_NAME=applauncher\n+ NGINX_CONF=/etc/nginx/nginx.conf\n+ BUILD_PATH=/vol/builds/applauncher\n+ DIST_PATH=dist\n++ sed \'s/\\///\'\n++ grep -o \'\\/[0-9]\\+\\.\\?[0-9]\\+\\.\\?[0-9]\\+\\.\\?\'\n++ hg branch\n+ SHORT_NAME=0000\n+ rm -rf /vol/builds/applauncher/0000\n+ mkdir -p /vol/builds/applauncher/0000\n+ cp -r \'dist/*/*\' /vol/builds/applauncher/0000\ncp: не удалось выполнить stat для «dist/*/*»: Нет такого файла или каталога\n',
-merged: 'добавляем наборы изменений\nдобавляем манифесты\nдобавляем изменения в файлы\nдобавлено 501 наборов изменений с 690 изменениями в 156 файлах\nобновляемся на ветку feature/0000-test-for-strider\n103 файлов обновлено, 0 слито, 0 удалено, 0 c конфликтами\n0 файлов обновлено, 0 слито, 0 удалено, 0 c конфликтами\n+ \'[\' -z \'\' \']\'\n+ return\n+ case $- in\n+ return\n+ PROJECT_NAME=applauncher\n+ NGINX_CONF=/etc/nginx/nginx.conf\n+ BUILD_PATH=/vol/builds/applauncher\n+ DIST_PATH=dist\n++ sed \'s/\\///\'\n++ grep -o \'\\/[0-9]\\+\\.\\?[0-9]\\+\\.\\?[0-9]\\+\\.\\?\'\n++ hg branch\n+ SHORT_NAME=0000\n+ rm -rf /vol/builds/applauncher/0000\n+ mkdir -p /vol/builds/applauncher/0000\n+ cp -r \'dist/*/*\' /vol/builds/applauncher/0000\ncp: не удалось выполнить stat для «dist/*/*»: Нет такого файла или каталога\n' } }
+{ pullrequest_updated:
+{ description: '* flow: Created branch \'feature/open-app-in-embedding\'.\r\n\r\n* Added opening of tizen apps in embedding\r\n\r\n* ZB version updated, removed duplicated autor from package.json\r\n\r\n* Fixed open in embeddiing by replacing onload to DOMContentLoaded\r\n\r\n* Merged with remote\r\n\r\n* Changed package version of tizen platform\r\n\r\n* Removed viewport appending in favor of newer zb\r\n\r\n* Close branch feature/open-app-in-embedding\r\n\r\n* Created new branch feature/0000-test-for-strider\r\n\r\n* Add update help bar on start\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* README-RU.md edited online with Bitbucket\r\n\r\n* README-RU.md edited online with Bitbucket\r\n\r\n* README-RU.md edited online with Bitbucket',
+title: 'Feature/0000 test for strider',
+destination: { commit: [Object], branch: [Object], repository: [Object] },
+reason: '',
+source: { commit: [Object], branch: [Object], repository: [Object] },
+state: 'OPEN',
+author:
+{ username: 'nomean42',
+type: 'user',
+display_name: 'Igor Goryaynov',
+uuid: '{7a903cab-8ed4-4944-828e-a827084d14ed}',
+links: [Object] },
+date: '2016-01-29T08:30:19.620135+00:00' } }
