@@ -69,17 +69,3 @@
         "date": "2013-11-06T06:00:16.196841+00:00"
     }
 }
-{ pullrequest_updated:
-{ description: '* flow: Created branch \'feature/open-app-in-embedding\'.\r\n\r\n* Added opening of tizen apps in embedding\r\n\r\n* ZB version updated, removed duplicated autor from package.json\r\n\r\n* Fixed open in embeddiing by replacing onload to DOMContentLoaded\r\n\r\n* Merged with remote\r\n\r\n* Changed package version of tizen platform\r\n\r\n* Removed viewport appending in favor of newer zb\r\n\r\n* Close branch feature/open-app-in-embedding\r\n\r\n* Created new branch feature/0000-test-for-strider\r\n\r\n* Add update help bar on start\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* test commit\r\n\r\n* README-RU.md edited online with Bitbucket\r\n\r\n* README-RU.md edited online with Bitbucket\r\n\r\n* README-RU.md edited online with Bitbucket',
-title: 'Feature/0000 test for strider',
-destination: { commit: [Object], branch: [Object], repository: [Object] },
-reason: '',
-source: { commit: [Object], branch: [Object], repository: [Object] },
-state: 'OPEN',
-author:
-{ username: 'nomean42',
-type: 'user',
-display_name: 'Igor Goryaynov',
-uuid: '{7a903cab-8ed4-4944-828e-a827084d14ed}',
-links: [Object] },
-date: '2016-01-29T08:30:19.620135+00:00' } }
