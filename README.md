@@ -7,7 +7,7 @@ webhooks.
 
 [![NPM](https://nodei.co/npm/strider-bitbucket.png)](https://nodei.co/npm/strider-bitbucket/)
 
-## What's done
+# Features
 
 - configuration
 - clone, update, code caching
