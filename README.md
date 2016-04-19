@@ -14,10 +14,7 @@ webhooks.
 - commit webhooks management
 - ssh key management
 - skipping commits via `[skip ci]` in commit message
-
-## What's not done
-
-- pull-request webhook handling (they are created, we just don't do anything with them atm)
+- pull-request webhook handling (Bitbucket Cloud)
 
 # Configuration
 
