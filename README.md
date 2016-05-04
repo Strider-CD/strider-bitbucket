@@ -35,3 +35,9 @@ consumer".
 
 Then set the env variables `PLUGIN_BITBUCKET_APP_KEY` and
 `PLUGIN_BITBUCKET_APP_SECRET` to the values given you.
+
+## Testing
+
+```no-highlight
+npm test
+```
