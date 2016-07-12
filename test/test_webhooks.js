@@ -7,7 +7,7 @@ describe('The Webhooks parsing', function () {
   var payload = require('./example_post')
   describe('.parseHook(payload)', function () {
     it('should parse an example', function () {
-      expect(api.postPayload(payload)).to.eql({
+      expect(api.parseCommitData(payload)).to.eql({
         trigger: {
           type: 'commit',
           author: {
