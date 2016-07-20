@@ -1,10 +1,9 @@
-
-var expect = require('expect.js')
-  , api = require('../lib/api.js')
+var expect = require('expect.js');
+var api = require('../lib/api.js');
 
 describe('The Bitbucket API', function () {
   describe('.parseRepo(repo)', function () {
-    var gitrepo = require('./example_repo')
+    var gitrepo = require('./example_repo');
     it('should parse an example git repo', function () {
       expect(api.parseRepo(gitrepo)).to.eql({
         id: '1team/justdirectteam',
@@ -22,7 +21,7 @@ describe('The Bitbucket API', function () {
           pull_requests: 'none',
           whitelist: []
         }
-      })
+      });
     });
     var hgrepo = require('./example_hg_repo');
     it('should parse an example hg repo', function () {
@@ -42,7 +41,7 @@ describe('The Bitbucket API', function () {
           pull_requests: 'none',
           whitelist: []
         }
-      })
+      });
     });
-  })
-})
+  });
+});

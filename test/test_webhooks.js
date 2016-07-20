@@ -1,10 +1,10 @@
 
-var expect = require('expect.js')
-  , api = require('../lib/api.js')
-  , gravatar = require('gravatar')
+var expect = require('expect.js');
+var api = require('../lib/api.js');
+var gravatar = require('gravatar');
 
 describe('The Webhooks parsing', function () {
-  var payload = require('./example_post')
+  var payload = require('./example_post');
   describe('.parseHook(payload)', function () {
     it('should parse an example', function () {
       expect(api.parseCommitData(payload)).to.eql({
@@ -29,7 +29,7 @@ describe('The Webhooks parsing', function () {
           branch: 'master',
           id: '0fa628b2b56c48f937e9c375f555a5870faaa8fe'
         }
-      })
-    })
-  })
-})
+      });
+    });
+  });
+});

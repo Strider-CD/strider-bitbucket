@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && npm run test-only",
-    "lint": "jshint *.json lib test config",
+    "lint": "eslint config lib test",
     "test-only": "mocha -R spec",
     "tdd": "mocha -R spec -w"
   },
@@ -20,6 +20,9 @@
     "oauth",
     "strider"
   ],
+  "engines": {
+    "node": ">=4.2"
+  },
   "author": "Jared Forsyth <jared@jaredforsyth.com>",
   "license": "MIT",
   "readmeFilename": "Readme.md",
@@ -40,8 +43,8 @@
   },
   "devDependencies": {
     "chai": "~1.8.1",
+    "eslint": "^3.1.1",
     "expect.js": "~0.2.0",
-    "jshint": "~2.1.11",
     "mocha": "~1.13.0",
     "sinon": "^1.10.2"
   },
