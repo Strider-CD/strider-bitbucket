@@ -1,4 +1,4 @@
-var expect = require('expect.js');
+var expect = require('chai').expect;
 var api = require('../lib/api.js');
 
 describe('The Bitbucket API', function () {
