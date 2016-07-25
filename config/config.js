@@ -1,3 +1,5 @@
+'use strict';
+
 /* globals app, $ */
 app.controller('BitbucketCtrl', ['$scope', function ($scope) {
 
@@ -6,7 +8,7 @@ app.controller('BitbucketCtrl', ['$scope', function ($scope) {
 
   $scope.addWebhooks = function () {
     $scope.loadingWebhooks = true;
-    $.ajax($scope.api_root + 'bitbucket/hook', {
+    $.ajax(`${$scope.api_root}bitbucket/hook`, {
       type: 'POST',
       success: function () {
         $scope.loadingWebhooks = false;
@@ -21,7 +23,7 @@ app.controller('BitbucketCtrl', ['$scope', function ($scope) {
 
   $scope.deleteWebhooks = function () {
     $scope.loadingWebhooks = true;
-    $.ajax($scope.api_root + 'bitbucket/hook', {
+    $.ajax(`${$scope.api_root}bitbucket/hook`, {
       type: 'DELETE',
       success: function (data) {
         $scope.loadingWebhooks = false;

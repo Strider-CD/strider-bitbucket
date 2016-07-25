@@ -1,5 +1,7 @@
-var expect = require('chai').expect;
+'use strict';
+
 var api = require('../lib/api.js');
+var expect = require('chai').expect;
 var gravatar = require('gravatar');
 
 describe('The Webhooks parsing', function () {
