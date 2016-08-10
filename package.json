@@ -1,7 +1,7 @@
 {
   "name": "strider-bitbucket",
   "version": "1.4.2",
-  "description": "A bitbucket provider for strider",
+  "description": "A Bitbucket provider for Strider",
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && npm run test-only",
@@ -25,7 +25,7 @@
   },
   "author": "Jared Forsyth <jared@jaredforsyth.com>",
   "license": "MIT",
-  "readmeFilename": "Readme.md",
+  "readmeFilename": "README.md",
   "strider": {
     "id": "bitbucket",
     "title": "Bitbucket",
@@ -42,24 +42,18 @@
     "inline_icon": "bitbucket"
   },
   "devDependencies": {
-    "chai": "~1.8.1",
-    "eslint": "^3.1.1",
-    "mocha": "~1.13.0",
-    "sinon": "^1.10.2"
+    "chai": "^3.5.0",
+    "eslint": "^3.2.2",
+    "mocha": "^3.0.2",
+    "sinon": "^1.17.5"
   },
   "dependencies": {
-    "async": "~0.2.9",
-    "crypto": "0.0.3",
+    "async": "^2.0.1",
     "debug": "^2.2.0",
-    "gravatar": "~1.0.6",
-    "lodash": "~2.2.0",
-    "oauth": "~0.9.10",
-    "passport": "~0.1.17",
-    "passport-bitbucket": "~0.1.2",
-    "request": "~2.27.0",
-    "step": "0.0.5",
-    "strider-git": "~0.2.4",
-    "strider-hg": "~0.2.3",
-    "superagent": "~0.15.4"
+    "gravatar": "^1.5.2",
+    "oauth": "^0.9.10",
+    "passport-bitbucket": "^2.0.0",
+    "strider-git": "^0.2.4",
+    "strider-hg": "^0.2.3"
   }
 }
