@@ -1,6 +1,6 @@
 {
   "name": "strider-bitbucket",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "A Bitbucket provider for Strider",
   "main": "index.js",
   "scripts": {
