@@ -35,7 +35,7 @@
       "controller": "BitbucketCtrl"
     },
     "accountConfig": {
-      "setupLink": "/ext/bitbucket/oauth"
+      "setupLink": "/account/#provider-bitbucket"
     },
     "webapp": "lib/webapp.js",
     "worker": "lib/worker.js",
